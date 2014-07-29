@@ -1,0 +1,136 @@
+.block {
+    position: absolute;
+    background-color: white;
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+.food {
+    background-color: red;
+}
+
+.message {
+    position: absolute;
+    height: 400px;
+    width: 800px;
+    margin-left: -400px;
+    margin-top: -200px;
+    top: 50%;
+    left: 50%;
+    line-height: 400px;
+    font-family: Arial;
+    font-size: 200px;
+    text-align: center;
+    color: white;
+    text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
+}
+
+.board {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    box-sizing: border-box;
+    border: 1px solid white;
+}
+
+.pane {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 70%;
+    width: 100%;
+    background: black;
+}
+
+.horizontal-buttons {
+    position: absolute;
+    top: 70%;
+    left: 0;
+    height: 30%;
+    width: 50%;
+    background: yellow;
+}
+
+.vertical-buttons {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    height: 30%;
+    width: 50%;
+    background: red;
+}
+
+.left-arrow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50%;
+    width: 100%;
+}
+
+.right-arrow {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 50%;
+    width: 100%;
+    background: blue;
+}
+
+.up-arrow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50%;
+    width: 100%;
+}
+
+.down-arrow {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 50%;
+    width: 100%;
+    background: green;
+}
+
+/* Landscape Orientation */
+@media (orientation: landscape) {
+    .pane {
+        left: 15%;
+        height: 100%;
+        width: 70%;
+    }
+
+    .horizontal-buttons {
+        top: 0;
+        height: 100%;
+        width: 15%;
+    }
+
+    .vertical-buttons {
+        top: 0;
+        left: 85%;
+        height: 100%;
+        width: 15%;
+    }
+}
+
+/* Desktop Styles */
+@media (min-device-width: 992px) {
+    .pane {
+        left: 0;
+        height: 100%;
+        width: 100%;
+    }
+
+    .horizontal-buttons {
+        display: none;
+        visibility: hidden;
+    }
+
+    .vertical-buttons {
+        display: none;
+        visibility: hidden;
+    }
+}
