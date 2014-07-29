@@ -42,7 +42,7 @@
     background: black;
 }
 
-.horizontal-buttons {
+.buttons-1 {
     position: absolute;
     top: 70%;
     left: 0;
@@ -51,7 +51,7 @@
     background: yellow;
 }
 
-.vertical-buttons {
+.buttons-2 {
     position: absolute;
     top: 70%;
     left: 50%;
@@ -60,38 +60,26 @@
     background: red;
 }
 
-.left-arrow {
+.button {
     position: absolute;
+    left: 0;
+    width: 100%;
+    background: black;
+    border: 1px solid white;
+    box-sizing: border-box;
+}
+.button:active {
+    background: white;
+}
+
+.btn-top {
     top: 0;
-    left: 0;
     height: 50%;
-    width: 100%;
 }
 
-.right-arrow {
-    position: absolute;
+.btn-bottom {
     top: 50%;
-    left: 0;
     height: 50%;
-    width: 100%;
-    background: blue;
-}
-
-.up-arrow {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 50%;
-    width: 100%;
-}
-
-.down-arrow {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    height: 50%;
-    width: 100%;
-    background: green;
 }
 
 /* Landscape Orientation */
@@ -102,13 +90,13 @@
         width: 70%;
     }
 
-    .horizontal-buttons {
+    .buttons-1 {
         top: 0;
         height: 100%;
         width: 15%;
     }
 
-    .vertical-buttons {
+    .buttons-2 {
         top: 0;
         left: 85%;
         height: 100%;
@@ -124,12 +112,12 @@
         width: 100%;
     }
 
-    .horizontal-buttons {
+    .buttons-1 {
         display: none;
         visibility: hidden;
     }
 
-    .vertical-buttons {
+    .buttons-2 {
         display: none;
         visibility: hidden;
     }

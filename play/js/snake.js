@@ -70,6 +70,7 @@
         $("#message").empty().append(score);
         $(".block").css("zIndex", 0);
         $("#message").css("zIndex", 1);
+        $("#message").show();
         score = 0;
         set = false;
     }
@@ -169,25 +170,27 @@
     }
 
     function tapHandler(e) {
+        console.log(e.target);
+
         // determine which key
         var key = "pane";
-        if (e.target == document.getElementById("left-arrow")) key = "left";
-        else if (e.target == document.getElementById("up-arrow")) key = "up";
-        else if (e.target == document.getElementById("right-arrow")) key = "right";
-        else if (e.target == document.getElementById("down-arrow")) key = "down";
+        if (e.target == document.getElementById("top-left")) key = "up left";
+        else if (e.target == document.getElementById("bottom-left")) key = "down left";
+        else if (e.target == document.getElementById("top-right")) key = "up right";
+        else if (e.target == document.getElementById("bottom-right")) key = "down right";
 
         // arrows
         if (running && !turned) {
-            if (key == "left" && direction.y != 0) left();
-            else if (key == "up" && direction.x != 0) up();
-            else if (key == "right" && direction.y != 0) right();
-            else if (key == "down" && direction.x != 0) down();
+            if (new RegExp("left").test(key) && direction.y != 0) left();
+            else if (new RegExp("up").test(key) && direction.x != 0) up();
+            else if (new RegExp("right").test(key) && direction.y != 0) right();
+            else if (new RegExp("down").test(key) && direction.x != 0) down();
             else {}
             turned = true;
         }
 
         // pause
-        if (key == "pane") pause();
+        if (new RegExp("pane").test(key)) pause();
     }
 
     function resizeWindow() {
@@ -215,8 +218,6 @@
         width = Math.floor(windowWidth / SIZE);
 
         SPEED = 3000 / width;
-        console.log(SPEED);
-
     }
 
     function setup() {
@@ -246,6 +247,7 @@
         $(".block").remove(":not(#food)");
         blocks = [];
         $("#message").empty();
+        $("#message").hide();
 
         // resize window
         resizeWindow();
