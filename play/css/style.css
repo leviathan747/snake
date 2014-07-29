@@ -40,6 +40,7 @@
     height: 70%;
     width: 100%;
     background: black;
+    overflow: hidden;
 }
 
 .buttons-1 {
@@ -48,7 +49,6 @@
     left: 0;
     height: 30%;
     width: 50%;
-    background: yellow;
 }
 
 .buttons-2 {
@@ -57,7 +57,6 @@
     left: 50%;
     height: 30%;
     width: 50%;
-    background: red;
 }
 
 .button {
@@ -69,7 +68,7 @@
     box-sizing: border-box;
 }
 .button:active {
-    background: white;
+    background: #202020;
 }
 
 .btn-top {

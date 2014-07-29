@@ -1,10 +1,13 @@
 // publicly accessible objects
 
 (function() { 
-    // CONSTANTS //
-    var SPEED = 50;             // milliseconds between update. Default equivilent to 3 seconds to cross the width
-    var SIZE = 20;              // block size
+    // CONSTANTS (defaults for mobile) //
+    var SPEED = 100;            // milliseconds between update. 
+    var SIZE = 15;              // block size
     var LENGTH = 5;             // length of the snake initially
+
+    var DESKTOP_SPEED = 50;
+    var DESKTOP_SIZE = 20;
 
     var running;                // if a game has been started
     var set;                    // if a game is ready
@@ -170,7 +173,7 @@
     }
 
     function tapHandler(e) {
-        console.log(e.target);
+        //console.log(e.target);
 
         // determine which key
         var key = "pane";
@@ -197,6 +200,12 @@
         var landscape = window.matchMedia("(orientation: landscape)").matches;
         var desktop = window.matchMedia("(min-device-width: 992px)").matches;
 
+        // set constants
+        if (desktop) {
+            SPEED = DESKTOP_SPEED;
+            SIZE = DESKTOP_SIZE;
+        }
+
         var percent_x = 1;
         var percent_y = 0.7;
 
@@ -216,8 +225,6 @@
 
         height = Math.floor(windowHeight / SIZE);
         width = Math.floor(windowWidth / SIZE);
-
-        SPEED = 3000 / width;
     }
 
     function setup() {
@@ -300,12 +307,17 @@
         $(document).keydown(function(e) {keyHandler(e);});
 
         // initiate touchscreen listener
-        $(document).bind('tap', function(e) {tapHandler(e);});
+        $(document).click(function(e) {tapHandler(e);});
 
         // initiate resize listener
         $(window).resize(function(e) {
             stopGame();
             setup();
+        });
+
+        // bind fastclick
+        $(function() {
+            FastClick.attach(document.body);
         });
     });
 })();
