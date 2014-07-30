@@ -1,11 +1,6 @@
 // public API
 var Snake;
-
-// cheat function to be overridden
-function cheat() {
-    // do nothing
-    return null;
-}
+var Cheat;
 
 (function() { 
     // CONSTANTS (defaults for mobile) //
@@ -23,6 +18,7 @@ function cheat() {
     var set;                    // if a game is ready
     var turned;                 // to keep from turning more than once per update
 
+    var cheatPlugin;            // cheat plugin object
     var cheatEnabled;           // is the cheat function active
     var history;                // button history to enable cheat
 
@@ -43,8 +39,8 @@ function cheat() {
 
     function update() {
         // execute cheat
-        if (cheatEnabled) {
-            var new_direction = cheat();
+        if (cheatEnabled && cheatPlugin) {
+            var new_direction = cheatPlugin.cheat();
             if (new_direction &&                                                        // new direction exists
                 (Math.abs(new_direction.x) + Math.abs(new_direction.y) == 1) &&           // not a diagonal move or no move
                 !(new_direction.x == 0 && direction.x == 0) &&                          // not a 180
@@ -180,17 +176,19 @@ function cheat() {
     }
 
     function enableCheat() {
-        if (cheatEnabled) {
-            // disable cheat
-            cheatEnabled = false;
-            $("#board").removeClass("red-border");
-            $(".button").removeClass("red-border");
-        }
-        else {
-            // enable cheat
-            cheatEnabled = true;
-            $("#board").addClass("red-border");
-            $(".button").addClass("red-border");
+        if (cheatPlugin) {
+            if (cheatEnabled) {
+                // disable cheat
+                cheatEnabled = false;
+                $("#board").removeClass("red-border");
+                $(".button").removeClass("red-border");
+            }
+            else {
+                // enable cheat
+                cheatEnabled = true;
+                $("#board").addClass("red-border");
+                $(".button").addClass("red-border");
+            }
         }
     }
 
@@ -343,6 +341,9 @@ function cheat() {
     }
 
     $(document).ready(function() {
+        // create cheat object
+        if (Cheat) cheatPlugin = new Cheat();
+
         setup();
 
         // initiate keyboard listener
