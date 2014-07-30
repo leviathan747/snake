@@ -1,4 +1,11 @@
-// publicly accessible objects
+// public API
+var Snake;
+
+// cheat function to be overridden
+function cheat() {
+    // do nothing
+    return null;
+}
 
 (function() { 
     // CONSTANTS (defaults for mobile) //
@@ -28,9 +35,38 @@
     var tail;                   // pointer to the tail block
     var head;                   // pointer to head block
 
+    // public API definition
+    Snake = function() {
+
+        // return height of board in blocks
+        this.getHeight = function() {
+            return height;
+        }
+
+        // return width of board in blocks
+        this.getWidth = function() {
+            return width;
+        }
+
+        // return 2D array of positions
+        this.getPositions = function() {
+            return positions;
+        }
+
+        // return the current direction
+        this.getDirection = function() {
+            return direction;
+        }
+
+    }
+
     function update() {
         var x = head.x + direction.x;
         var y = head.y + direction.y;
+
+        // execute cheat
+        var new_direction = cheat();
+        if (new_direction) direction = new_direction;
 
         // check position
         var check = checkPosition(x, y);
@@ -280,24 +316,6 @@
         placeFood();
 
         set = true;
-    }
-
-    function updateSpeed(speed) {
-        SPEED = speed;
-        gameOver();
-        setup();
-    }
-
-    function updateSize(size) {
-        SIZE = size;
-        gameOver();
-        setup();
-    }
-
-    function updateLength(length) {
-        LENGTH = length;
-        gameOver();
-        setup();
     }
 
     $(document).ready(function() {
