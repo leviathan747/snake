@@ -1,4 +1,6 @@
-// publicly accessible objects
+// public API
+var Snake;
+var Cheat;
 
 (function() { 
     // CONSTANTS (defaults for mobile) //
@@ -9,16 +11,23 @@
     var DESKTOP_SPEED = 50;
     var DESKTOP_SIZE = 20;
 
+    var DESKTOP_CHEAT = "up,left,down,left,right,right,right";
+    var MOBILE_CHEAT = "up left,down left,down right,down left,up right,up right,up right";
+
     var running;                // if a game has been started
     var set;                    // if a game is ready
     var turned;                 // to keep from turning more than once per update
+
+    var cheatPlugin;            // cheat plugin object
+    var cheatEnabled;           // is the cheat function active
+    var history;                // button history to enable cheat
 
     var score;
 
     var width;                  // number of tiles across
     var height;                 // number of tiles top to bottom
 
-    var positions;              // 2D array to keep track of positions
+    var positions;              // 2D array to keep track of positions. 0 = blank, 1 = obstacle, 2 = food
 
     var loop;                   // interval loop
 
@@ -29,6 +38,18 @@
     var head;                   // pointer to head block
 
     function update() {
+        // execute cheat
+        if (cheatEnabled && cheatPlugin) {
+            var new_direction = cheatPlugin.cheat();
+            if (new_direction &&                                                        // new direction exists
+                (Math.abs(new_direction.x) + Math.abs(new_direction.y) == 1) &&           // not a diagonal move or no move
+                !(new_direction.x == 0 && direction.x == 0) &&                          // not a 180
+                !(new_direction.y == 0 && direction.y == 0) ) {
+                direction = new_direction;
+            }
+        }
+
+        // set new position
         var x = head.x + direction.x;
         var y = head.y + direction.y;
 
@@ -64,6 +85,9 @@
         if (positions[x][y] == 0) {
             moveTo($("#food"), x, y);
             positions[x][y] = 2;
+            var food = document.getElementById("food");
+            food.x = x;
+            food.y = y;
         }
         else placeFood();
     }
@@ -151,8 +175,33 @@
         }
     }
 
+    function enableCheat() {
+        if (cheatPlugin) {
+            if (cheatEnabled) {
+                // disable cheat
+                cheatEnabled = false;
+                $("#board").removeClass("red-border");
+                $(".button").removeClass("red-border");
+            }
+            else {
+                // enable cheat
+                cheatEnabled = true;
+                $("#board").addClass("red-border");
+                $(".button").addClass("red-border");
+            }
+        }
+    }
+
     function keyHandler(e) {
         //console.log(e.keyCode);
+        if (e.keyCode == 37) history.add("left");
+        else if (e.keyCode == 38) history.add("up");
+        else if (e.keyCode == 39) history.add("right");
+        else if (e.keyCode == 40) history.add("down");
+        else history.add("");
+
+        // check cheat
+        if (history.toString() == DESKTOP_CHEAT) enableCheat();
 
         // arrow keys
         if (running && !turned) {
@@ -181,6 +230,10 @@
         else if (e.target == document.getElementById("bottom-left")) key = "down left";
         else if (e.target == document.getElementById("top-right")) key = "up right";
         else if (e.target == document.getElementById("bottom-right")) key = "down right";
+
+        // check cheat
+        history.add(key);
+        if (history.toString() == MOBILE_CHEAT) enableCheat();
 
         // arrows
         if (running && !turned) {
@@ -232,6 +285,11 @@
         set = false;            // if a game is ready
         turned = false;         // to keep from turning more than once per update
 
+        cheatEnabled = false;
+        $("#board").removeClass("red-border");
+        $(".button").removeClass("red-border");
+        history = new History(7);
+
         score = 0;
 
         width = 0;              // number of tiles across
@@ -282,25 +340,10 @@
         set = true;
     }
 
-    function updateSpeed(speed) {
-        SPEED = speed;
-        gameOver();
-        setup();
-    }
-
-    function updateSize(size) {
-        SIZE = size;
-        gameOver();
-        setup();
-    }
-
-    function updateLength(length) {
-        LENGTH = length;
-        gameOver();
-        setup();
-    }
-
     $(document).ready(function() {
+        // create cheat object
+        if (Cheat) cheatPlugin = new Cheat();
+
         setup();
 
         // initiate keyboard listener
@@ -320,4 +363,45 @@
             FastClick.attach(document.body);
         });
     });
+
+    // public API definition
+    Snake = function() {
+
+        // return height of board in blocks
+        this.getHeight = function() {
+            return height;
+        }
+
+        // return width of board in blocks
+        this.getWidth = function() {
+            return width;
+        }
+
+        // return 2D array of positions
+        this.getPositions = function() {
+            return positions.clone();
+        }
+
+        // check position
+        this.checkPosition = function(x, y) {
+            return checkPosition(x, y);
+        }
+
+        // return head position
+        this.getPosition = function() {
+            return {x: head.x, y: head.y};
+        }
+
+        // return tail position
+        this.getTailPosition = function() {
+            return {x: tail.x, y: tail.y};
+        }
+
+        // return food position
+        this.getFoodPosition = function() {
+            var food = document.getElementById("food");
+            return {x: food.x, y: food.y};
+        }
+
+    }
 })();
