@@ -25,7 +25,7 @@ function cheat() {
     var width;                  // number of tiles across
     var height;                 // number of tiles top to bottom
 
-    var positions;              // 2D array to keep track of positions
+    var positions;              // 2D array to keep track of positions. 0 = blank, 1 = obstacle, 2 = food
 
     var loop;                   // interval loop
 
@@ -35,38 +35,19 @@ function cheat() {
     var tail;                   // pointer to the tail block
     var head;                   // pointer to head block
 
-    // public API definition
-    Snake = function() {
-
-        // return height of board in blocks
-        this.getHeight = function() {
-            return height;
-        }
-
-        // return width of board in blocks
-        this.getWidth = function() {
-            return width;
-        }
-
-        // return 2D array of positions
-        this.getPositions = function() {
-            return positions;
-        }
-
-        // return the current direction
-        this.getDirection = function() {
-            return direction;
-        }
-
-    }
-
     function update() {
-        var x = head.x + direction.x;
-        var y = head.y + direction.y;
-
         // execute cheat
         var new_direction = cheat();
-        if (new_direction) direction = new_direction;
+        if (new_direction &&                                                        // new direction exists
+            (Math.abs(new_direction.x) + Math.abs(new_direction.y) == 1) &&           // not a diagonal move or no move
+            !(new_direction.x == 0 && direction.x == 0) &&                          // not a 180
+            !(new_direction.y == 0 && direction.y == 0) ) {
+            direction = new_direction;
+        }
+
+        // set new position
+        var x = head.x + direction.x;
+        var y = head.y + direction.y;
 
         // check position
         var check = checkPosition(x, y);
@@ -100,6 +81,9 @@ function cheat() {
         if (positions[x][y] == 0) {
             moveTo($("#food"), x, y);
             positions[x][y] = 2;
+            var food = document.getElementById("food");
+            food.x = x;
+            food.y = y;
         }
         else placeFood();
     }
@@ -338,4 +322,45 @@ function cheat() {
             FastClick.attach(document.body);
         });
     });
+
+    // public API definition
+    Snake = function() {
+
+        // return height of board in blocks
+        this.getHeight = function() {
+            return height;
+        }
+
+        // return width of board in blocks
+        this.getWidth = function() {
+            return width;
+        }
+
+        // return 2D array of positions
+        this.getPositions = function() {
+            return positions.clone();
+        }
+
+        // check position
+        this.checkPosition = function(x, y) {
+            return checkPosition(x, y);
+        }
+
+        // return head position
+        this.getPosition = function() {
+            return {x: head.x, y: head.y};
+        }
+
+        // return tail position
+        this.getTailPosition = function() {
+            return {x: tail.x, y: tail.y};
+        }
+
+        // return food position
+        this.getFoodPosition = function() {
+            var food = document.getElementById("food");
+            return {x: food.x, y: food.y};
+        }
+
+    }
 })();
