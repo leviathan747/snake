@@ -16,9 +16,15 @@ function cheat() {
     var DESKTOP_SPEED = 50;
     var DESKTOP_SIZE = 20;
 
+    var DESKTOP_CHEAT = "up,left,down,left,right,right,right";
+    var MOBILE_CHEAT = "up left,down left,down right,down left,up right,up right,up right";
+
     var running;                // if a game has been started
     var set;                    // if a game is ready
     var turned;                 // to keep from turning more than once per update
+
+    var cheatEnabled;           // is the cheat function active
+    var history;                // button history to enable cheat
 
     var score;
 
@@ -37,12 +43,14 @@ function cheat() {
 
     function update() {
         // execute cheat
-        var new_direction = cheat();
-        if (new_direction &&                                                        // new direction exists
-            (Math.abs(new_direction.x) + Math.abs(new_direction.y) == 1) &&           // not a diagonal move or no move
-            !(new_direction.x == 0 && direction.x == 0) &&                          // not a 180
-            !(new_direction.y == 0 && direction.y == 0) ) {
-            direction = new_direction;
+        if (cheatEnabled) {
+            var new_direction = cheat();
+            if (new_direction &&                                                        // new direction exists
+                (Math.abs(new_direction.x) + Math.abs(new_direction.y) == 1) &&           // not a diagonal move or no move
+                !(new_direction.x == 0 && direction.x == 0) &&                          // not a 180
+                !(new_direction.y == 0 && direction.y == 0) ) {
+                direction = new_direction;
+            }
         }
 
         // set new position
@@ -171,8 +179,31 @@ function cheat() {
         }
     }
 
+    function enableCheat() {
+        if (cheatEnabled) {
+            // disable cheat
+            cheatEnabled = false;
+            $("#board").removeClass("red-border");
+            $(".button").removeClass("red-border");
+        }
+        else {
+            // enable cheat
+            cheatEnabled = true;
+            $("#board").addClass("red-border");
+            $(".button").addClass("red-border");
+        }
+    }
+
     function keyHandler(e) {
         //console.log(e.keyCode);
+        if (e.keyCode == 37) history.add("left");
+        else if (e.keyCode == 38) history.add("up");
+        else if (e.keyCode == 39) history.add("right");
+        else if (e.keyCode == 40) history.add("down");
+        else history.add("");
+
+        // check cheat
+        if (history.toString() == DESKTOP_CHEAT) enableCheat();
 
         // arrow keys
         if (running && !turned) {
@@ -201,6 +232,10 @@ function cheat() {
         else if (e.target == document.getElementById("bottom-left")) key = "down left";
         else if (e.target == document.getElementById("top-right")) key = "up right";
         else if (e.target == document.getElementById("bottom-right")) key = "down right";
+
+        // check cheat
+        history.add(key);
+        if (history.toString() == MOBILE_CHEAT) enableCheat();
 
         // arrows
         if (running && !turned) {
@@ -251,6 +286,11 @@ function cheat() {
         running = false;        // if a game has been started
         set = false;            // if a game is ready
         turned = false;         // to keep from turning more than once per update
+
+        cheatEnabled = false;
+        $("#board").removeClass("red-border");
+        $(".button").removeClass("red-border");
+        history = new History(7);
 
         score = 0;
 
