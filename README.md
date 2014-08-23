@@ -1,4 +1,4 @@
 Snake!
 =========
 
-Mobile and web versions of snake game
+levistarrett.com/snake
