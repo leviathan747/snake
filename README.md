@@ -1,4 +1,4 @@
 Snake!
 =========
 
-levistarrett.com/snake
+http://levistarrett.com/snake
