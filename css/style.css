@@ -1,0 +1,67 @@
+body {
+    background-color: black;
+    color: white;
+    font-size: 12pt;
+}
+            
+a {color:red}
+a:hover,visited,active {color:red}
+
+.hidden-mobile {
+    display: none;
+    visibility: hidden;
+}
+.hidden-desktop {
+    display: inherit;
+    visibility: visible;
+}
+
+.mobile-button {
+    height: 90px;
+    width: 150px;
+    padding: 0 10px;
+    border: 1px solid white;
+    text-align: center;
+}
+.mobile-button:active {
+    background: #202020;
+}
+
+/* Desktop Styles */
+@media (min-device-width: 992px) {
+    .hidden-mobile {
+        display: inherit;
+        visibility: visible;
+    }
+    .hidden-desktop {
+        display: none;
+        visibility: hidden;
+    }
+
+    .arrow-wrapper {
+        height: 50px;
+        width: 50px;
+        text-align: center;
+        font-size: 30px;
+        border: 1px solid white;
+    }
+
+    .key-label {
+        padding-left: 10px;
+        padding-right: 30px;
+    }
+}
+
+@media print {
+    body {
+        background-color: white;
+        color: black;
+    }
+    .arrow-wrapper, .mobile-button {
+        border: 1px solid black;
+    }
+    .print-hidden {
+        display: none;
+        visibility: hidden;
+    }
+}

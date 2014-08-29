@@ -14,20 +14,13 @@
         <link rel="shortcut icon" href="img/favicon.ico?v=1">
 
         <!-- styling -->
-        <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
-
-        <style>
-            a {color:red}
-            a:hover,visited,active {color:red}
-        </style>
-        
+        <link rel="stylesheet" href="css/style.css">
     </head>
     <body>
-        <div style="position:absolute;height:100%;width:100%;background:black;color:white;overflow-x:hidden;overflow-y:scroll;font-size:12pt">
         <div class="container-fluid">
-            <br>
-            <div class="row">
+            <div class="row print-hidden">
+                <br>
                 <div class="col-xs-12 col-md-8 col-md-offset-2" style="-webkit-user-select:none">
                         <img class="img-responsive pull-left" alt="banner.png" src="img/banner.png" style="max-width:30%">
                         <img class="img-responsive pull-right" alt="title.png" src="img/title.png" style="max-width:60%">
@@ -36,31 +29,54 @@
             <br>
             <div class="row">
                 <div class="col-xs-12 col-md-8 col-md-offset-2">
-                    <h2>How to play</h2>
+                    <h1>How to play</h1>
                     <p>
-                        Control your snake to eat food and grow long without hitting the walls. Last longer and eat more food to get
-                        a higher score!<br>
-                        <b><em>Desktop Controls:</em></b> Arrow keys to move, spacebar to pause and play.<br>
-                        <b><em>Mobile Controls:</em></b> Press either of the two top buttons to go up, either of the two bottom buttons to go
-                        down. Similarly, press either of the two left buttons to go left and either of the two right buttons to go right.
-                        Tap the game screen to pause and play.<br>
-                        <a href="play">Play snake</a>
+                        <div class="hidden-mobile">
+                            <table style="margin: 10px 0"><tr>
+                                <td class="arrow-wrapper"><span class="glyphicon glyphicon-arrow-left"></span></td>
+                                <td class="key-label">go left</span></td>
+                                <td class="arrow-wrapper"><span class="glyphicon glyphicon-arrow-up"></span></td>
+                                <td class="key-label">go up</span></td>
+                                <td class="arrow-wrapper"><span class="glyphicon glyphicon-arrow-right"></span></td>
+                                <td class="key-label">go right</td>
+                                <td class="arrow-wrapper"><span class="glyphicon glyphicon-arrow-down"></span></td>
+                                <td class="key-label">go down</td>
+                                <td class="arrow-wrapper" style="padding:0 30px">spacebar</td>
+                                <td class="key-label">pause/play</td>
+                            </tr></table>
+                        </div>
+                        <div class="hidden-desktop">
+                            <table style="margin: 10px 0">
+                                <tr>
+                                    <td class="mobile-button">go up/left</td>
+                                    <td class="mobile-button">go up/right</td>
+                                </tr>
+                                <tr>
+                                    <td class="mobile-button">go down/left</td>
+                                    <td class="mobile-button">go down/right</td>
+                                </tr>
+                            </table>
+                            Tap the center of the screen to pause/play<br>
+                        </div>
+                        Collect food to grow long and avoid walls and your own tail!<a href="play" style="padding-left:10px">Play snake</a>
                     </p>
+                    <br>
 
-                    <h2>Contributing</h2>
+                    <h1>Contributing</h1>
                     <p>
-                        Snake is an open source project. Contributions in the form of issues and pull
-                        requests are welcome. See the github repository
-                        <a href="http://github.com/leviathan747/snake">here</a>.
+                        Snake is an open source project. Contribute to the 
+                        <a href="http://github.com/leviathan747/snake">github repository</a> 
+                        by submitting issues and pull requests. Submit cheat algorithms into the <span style="color:red">/play/js/cheat</span>
+                        directory.
                     </p>
+                    <br>
 
-                    <h2>Cheat</h2>
+                    <h1>Cheat</h1>
                     <p>
                         This is how you write a cheat plugin
                     </p>
                 </div>
             </div>
-        </div>
         </div>
     </body>
 </html>
