@@ -17,6 +17,9 @@ const Snake = (function() {
     var DESKTOP_CHEAT = "up,left,down,left,right,right,right";
     var MOBILE_CHEAT = "up left,down left,down right,down left,up right,up right,up right";
 
+    var DESKTOP_SIDELOADER = "down,up,down,left,right,down,down";
+    var MOBILE_SIDELOADER = "down right,up left,down right,down left,up right,down right,down right";
+
     var running;                // if a game has been started
     var set;                    // if a game is ready
     var turned;                 // to keep from turning more than once per update
@@ -44,10 +47,7 @@ const Snake = (function() {
         if (cheatEnabled) {
             // validate the cheat method
             if (Cheat && typeof(Cheat.cheat) == "function") {
-                var start = new Date().getTime();
-                var new_direction = Cheat.cheat();
-                var end = new Date().getTime();
-                if (end - start > 3) console.log(end - start);
+                var new_direction = Cheat.cheat();      // execute cheat
 
                 // validate returned direction
                 if (new_direction &&                                                                            // direction exists
@@ -210,6 +210,12 @@ const Snake = (function() {
         }
     }
 
+    function enableSideloader() {
+        if (running) pause();
+        if (Sideloader.visible()) Sideloader.hide();
+        else Sideloader.show();
+    }
+
     function keyHandler(e) {
         //console.log(e.keyCode);
         if (e.keyCode == 37) history.add("left");
@@ -220,6 +226,9 @@ const Snake = (function() {
 
         // check cheat
         if (history.toString() == DESKTOP_CHEAT) enableCheat();
+
+        // check sideloader
+        if (history.toString() == DESKTOP_SIDELOADER) enableSideloader();
 
         // arrow keys
         if (running && !turned) {
@@ -233,7 +242,7 @@ const Snake = (function() {
         
         // space bar
         if (e.keyCode == 32) {
-            pause();
+            if (!Sideloader.visible()) pause();
         }
         else {}
 
@@ -253,6 +262,9 @@ const Snake = (function() {
         history.add(key);
         if (history.toString() == MOBILE_CHEAT) enableCheat();
 
+        // check sideloader
+        if (history.toString() == MOBILE_SIDELOADER) enableSideloader();
+
         // arrows
         if (running && !turned) {
             if (new RegExp("left").test(key) && direction.y != 0) left();
@@ -264,7 +276,9 @@ const Snake = (function() {
         }
 
         // pause
-        if (new RegExp("pane").test(key)) pause();
+        if (new RegExp("pane").test(key)) {
+            if (!Sideloader.visible()) pause();
+        }
     }
 
     function resizeWindow() {
