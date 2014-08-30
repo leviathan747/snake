@@ -46,7 +46,7 @@ const Sideloader = (function() {
         $("#load").click(function() {
             if (selected) {
                 $.get("js/cheat/" + selected.html(), null, function(text) {
-                    $("#cheat-script").empty().append(text);
+                    $("#cheat-container").empty().append("<script>" + text + "</script>");
                     Sideloader.hide();
                 }, "text")
                 .error(function(err) {
@@ -68,7 +68,7 @@ const Sideloader = (function() {
                 r.onload = function(e){
                     contents = e.target.result;
                     if (file.type == "text/javascript"){
-                        $("#cheat-script").empty().append(contents);
+                        $("#cheat-container").empty().append("<script>" + contents + "</script>");
                     }
                     else {
                         // error message?
@@ -89,6 +89,7 @@ const Sideloader = (function() {
     Sideloader.hide = function() {
         $(".cheat-row").removeClass("cheat-row-selected");
         selected = null;
+        $("#upload").val("");
         $("#cheat-box").css("zIndex", 0);
         $("#cheat-box").addClass("hidden");
     }
