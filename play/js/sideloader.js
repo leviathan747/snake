@@ -112,6 +112,7 @@ const Sideloader = (function() {
     Sideloader.hide = function() {
         $(".cheat-row").removeClass("cheat-row-selected");
         selected = null;
+        $("#upload").val("");
         $("#cheat-box").css("zIndex", 0);
         $("#cheat-box").addClass("hidden");
     }
