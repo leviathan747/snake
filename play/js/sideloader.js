@@ -47,21 +47,36 @@ const Sideloader = (function() {
             if (selected) {
                 $.get("js/cheat/" + selected.html(), null, function(text) {
                     $("#cheat-script").empty().append(text);
-                    $(".cheat-row").removeClass("cheat-row-selected");
-                    selected = null;
                     Sideloader.hide();
                 }, "text")
                 .error(function(err) {
                     if (err.status == 404) {
-                        $(".cheat-row").removeClass("cheat-row-selected");
-                        selected = null;
+                        // error message?
                         Sideloader.hide();
                     }
                 });
             }
         });
 
-        $("#upload").click(function() {
+        $("#upload").change(function(e) {
+            var files = e.target.files;
+            if (files.length == 1) {
+                var file = files[0];
+                var contents;
+                var name = file.name;
+                var r = new FileReader();
+                r.onload = function(e){
+                    contents = e.target.result;
+                    if (file.type == "text/javascript"){
+                        $("#cheat-script").empty().append(contents);
+                    }
+                    else {
+                        // error message?
+                    }
+                    Sideloader.hide();
+                }
+                r.readAsText(file);
+            }
         });
          
         loadCheats();
@@ -72,6 +87,8 @@ const Sideloader = (function() {
     var Sideloader = {};
 
     Sideloader.hide = function() {
+        $(".cheat-row").removeClass("cheat-row-selected");
+        selected = null;
         $("#cheat-box").css("zIndex", 0);
         $("#cheat-box").addClass("hidden");
     }

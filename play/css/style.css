@@ -73,17 +73,26 @@
 }
 
 .load-btn {
-    position: absolute;
-    height: 100%;
+    position: relative;
     width: 50%;
     font-family: Arial;
     font-size: 20px;
     background: black;
-    border 1px solid white;
+    border: 1px solid white;
     color: white;
+    text-align: center;
 }
 .load-btn:hover,active {
     color: red;
+}
+
+.uploader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
 }
 
 .buttons-1 {
