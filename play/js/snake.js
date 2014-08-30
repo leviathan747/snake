@@ -212,8 +212,20 @@ const Snake = (function() {
 
     function enableSideloader() {
         if (running) pause();
-        if (Sideloader.visible()) Sideloader.hide();
-        else Sideloader.show();
+        if (Sideloader.visible()) {
+            Sideloader.hide();
+
+            // set timeout to avoid double click
+            setTimeout(function() {
+                // initiate touchscreen listener
+                $(document).click(function(e) {tapHandler(e);});
+            }, 10);
+        }
+        else {
+            Sideloader.show();
+            // initiate touchscreen listener
+            $(document).unbind("click");
+        }
     }
 
     function keyHandler(e) {
@@ -380,6 +392,11 @@ const Snake = (function() {
 
         // initiate touchscreen listener
         $(document).click(function(e) {tapHandler(e);});
+
+        // sideloader exit listener
+        $("#exit").click(function() {
+            enableSideloader();
+        });
 
         // initiate resize listener
         $(window).resize(function(e) {

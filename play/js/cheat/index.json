@@ -1,6 +1,10 @@
 [
     {
-        "name": "brute-perc.js",
-        "description": "This is a cheat"
+        "name": "brute-percolation.js",
+        "description": "This cheat function works by evaluating all of the possible four moves and organizing the into one of five categories by checking three things: whether or not it will end the game, whether or not it will get you closer to the food, and whether or not all the blank space in the board is connected.<br><br>good_moves -- moves that get you closer to the food, don't kill you, and the board percolates.<br>fine_moves -- moves that don't get you closer to the food, but they don't kill you and the board still percolates.<br>decent_moves -- moves that get you closer to the food, you don't die, but the board doesn't percolate.<br>sketchy_moves -- moves that don't get you closer to the food, the board doesn't percolate, but at least you don't die.<br>bad_moves -- moves that kill you.<br><br>After all four possible moves are sorted, the first move is selected from the first group in this order. This algorithim uses a domino recursion to test percolation. It is therefore very brute and inefficient."
+    },
+    {
+        "name": "circular.js",
+        "description": "This cheat just turns every 10 blocks in a circular pattern"
     }
 ]
