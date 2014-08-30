@@ -44,10 +44,10 @@
             <div id="top-right" class="button btn-top"></div>
             <div id="bottom-right" class="button btn-bottom"></div>
         </div>
-        <div id="cheat-box" class="cheat-box">
+        <div id="cheat-box" class="cheat-box hidden">
             <div style="position:relative;height:10%;border:1px solid white">
                 <table style="height:100%;width:100%"><tr>
-                    <td class="title">Current cheat: <span id="title" style="color:red">None</span></td>
+                    <td class="title" id="title">None</td>
                     <td class="control-btn" id="clear">Clear</td>
                     <td class="control-btn" id="exit">Exit</td>
                 </tr></table>
@@ -56,7 +56,7 @@
             <div style="position:relative;height:10%">
                 <table style="height:100%;width:100%"><tr>
                 <td id="load" class="load-btn">Load</td>
-                <td class="load-btn">Upload<input type="file" id="upload" class="uploader"></td>
+                <td class="load-btn upload-btn">Upload<input type="file" id="upload" class="uploader"></td>
                 </tr></table>
             </div>
         </div>

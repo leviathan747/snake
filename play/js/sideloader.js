@@ -46,7 +46,7 @@ const Sideloader = (function() {
 
     // add a script element with the cheat
     function sideloadCheat(text, name) {
-        $("#cheat-script").empty().append(text);
+        $("#cheat-container").empty().append("<script>" + text + "</script>");
         $("#title").empty().append(name);
 
         $(".cheat-row").removeClass("cheat-row-selected");
@@ -64,9 +64,7 @@ const Sideloader = (function() {
             Cheat = undefined;
         });
 
-        $("#exit").click(function() {
-            Sideloader.hide();
-        });
+        // exit button listener in snake.js
 
         $("#load").click(function() {
             if (selected) {

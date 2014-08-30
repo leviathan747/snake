@@ -79,12 +79,14 @@ body {
 .title {
     position: relative;
     background: black;
-    padding: 0 10px;
+    padding: 0 20px;
+    color: red;
     border: 1px solid white;
 }
 
 .control-btn {
     position: relative;
+    width: 50px;
     background: black;
     border: 1px solid white;
     text-align: center;
@@ -97,7 +99,7 @@ body {
 .cheat-row {
     line-height: 40px;
     border: 1px solid white;
-    padding: 0 10px;
+    padding: 0 20px;
     background: black;
 }
 .cheat-row:hover,active {
@@ -116,6 +118,11 @@ body {
 }
 .load-btn:hover,active {
     color: red;
+}
+
+.upload-btn {
+    display: none;
+    visibility: hidden;
 }
 
 .uploader {
@@ -212,6 +219,10 @@ body {
     }
     .control-btn {
         width: 100px;
+    }
+    .upload-btn {
+        display: table-cell;
+        visibility: visible;
     }
     .description {
         font-size: 15px;
