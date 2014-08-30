@@ -14,40 +14,64 @@ const Sideloader = (function() {
         // get cheat index
         $.get("js/cheat/index.json", null, function(cheats) {
             for (var i = 0; i < cheats.length; i++) {
-                $("#cheat-table").append("<div class='cheat-row'>" + cheats[i].name + "</div");
+                $("#cheat-table").append("<div class='cheat-row'><div>" + cheats[i].name + "</div><div class='description hidden'>" + cheats[i].description + "</div></div");
             }
             $(".cheat-row").click(function(e) {
-                selectRow($(e.target));
+                selectRow($(e.target).parent());
             });
         }, "json");
     }
 
     // select
     function selectRow(row) {
-        if (selected && selected.html() == row.html()) {
+        if (selected && selected.html() == row.children().first().html()) {
             // deselect
             row.removeClass("cheat-row-selected");
+            row.children().eq(1).addClass("hidden");
             selected = null;
         }
         else {
             // deselect old row
-            if (selected) selected.removeClass("cheat-row-selected");
+            if (selected) {
+                selected.removeClass("cheat-row-selected");
+                selected.children().eq(1).addClass("hidden");
+            }
 
             // select
             row.addClass("cheat-row-selected");
-            selected = row;
+            row.children().eq(1).removeClass("hidden");
+            selected = row.children().first();
         }
+    }
+
+    // add a script element with the cheat
+    function sideloadCheat(text, name) {
+        $("#cheat-script").empty().append(text);
+        $("#title").empty().append(name);
+
+        $(".cheat-row").removeClass("cheat-row-selected");
+        $(".cheat-row div:nth-child(2)").addClass("hidden");
+        selected = null;
     }
 
     // init
     $(document).ready(function() {
 
         // button listeners
+        $("#clear").click(function() {
+            $("#cheat-container").empty();
+            $("#title").empty().append("None");
+            Cheat = undefined;
+        });
+
+        $("#exit").click(function() {
+            Sideloader.hide();
+        });
+
         $("#load").click(function() {
             if (selected) {
                 $.get("js/cheat/" + selected.html(), null, function(text) {
-                    $("#cheat-script").empty().append(text);
-                    Sideloader.hide();
+                    sideloadCheat(text, selected.html());
                 }, "text")
                 .error(function(err) {
                     if (err.status == 404) {
@@ -68,12 +92,11 @@ const Sideloader = (function() {
                 r.onload = function(e){
                     contents = e.target.result;
                     if (file.type == "text/javascript"){
-                        $("#cheat-script").empty().append(contents);
+                        sideloadCheat(contents, file.name);
                     }
                     else {
                         // error message?
                     }
-                    Sideloader.hide();
                 }
                 r.readAsText(file);
             }
