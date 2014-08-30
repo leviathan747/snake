@@ -17,16 +17,16 @@
         <link rel="stylesheet" href="css/style.css">
 
         <!-- libraries -->
-        <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
-        <script type="text/javascript" src="js/array_clone.js"></script>
-        <script type="text/javascript" src="js/history.js"></script>
-        <script type="text/javascript" src="js/fastclick.js"></script>
+        <script type="text/javascript" src="js/lib/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="js/lib/array_clone.js"></script>
+        <script type="text/javascript" src="js/lib/history.js"></script>
+        <script type="text/javascript" src="js/lib/fastclick.js"></script>
+
+        <!-- sideloader script -->
+        <script type="text/javascript" src="js/sideloader.js"></script>
 
         <!-- snake script -->
         <script type="text/javascript" src="js/snake.js"></script>
-
-        <!-- cheat plugin -->
-        <script type="text/javascript" src="js/cheat.js"></script>
 
     </head>
     <body>
@@ -44,5 +44,15 @@
             <div id="top-right" class="button btn-top"></div>
             <div id="bottom-right" class="button btn-bottom"></div>
         </div>
+        <div id="cheat-box" class="cheat-box hidden">
+            <div id="cheat-table" style="position:relative;height:90%;overflow-x:hidden;overflow-y:scroll"></div>
+            <div style="position:relative;height:10%">
+                <table style="height:100%;width:100%"><tr>
+                <td id="load" class="load-btn">Load</td>
+                <td class="load-btn">Upload<input type="file" id="upload" class="uploader"></td>
+                </tr></table>
+            </div>
+        </div>
+        <script id="cheat-script"></script>
     </body>
 </html>
