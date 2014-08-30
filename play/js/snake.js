@@ -1,8 +1,11 @@
-// public API
-var Snake;
+// cheat plugin interface
 var Cheat;
 
-(function() { 
+// snake game logic
+const Snake = (function() { 
+
+    "use strict";
+
     // CONSTANTS (defaults for mobile) //
     var SPEED = 100;            // milliseconds between update. 
     var SIZE = 15;              // block size
@@ -18,18 +21,17 @@ var Cheat;
     var set;                    // if a game is ready
     var turned;                 // to keep from turning more than once per update
 
-    var cheatPlugin;            // cheat plugin object
     var cheatEnabled;           // is the cheat function active
     var history;                // button history to enable cheat
 
-    var score;
+    var score;                  // current score
 
     var width;                  // number of tiles across
     var height;                 // number of tiles top to bottom
 
     var positions;              // 2D array to keep track of positions. 0 = blank, 1 = obstacle, 2 = food
 
-    var loop;                   // interval loop
+    var loop;                   // interval loop object
 
     var direction;              // direction to update in
     var blocks;
@@ -39,13 +41,29 @@ var Cheat;
 
     function update() {
         // execute cheat
-        if (cheatEnabled && cheatPlugin) {
-            var new_direction = cheatPlugin.cheat();
-            if (new_direction &&                                                        // new direction exists
-                (Math.abs(new_direction.x) + Math.abs(new_direction.y) == 1) &&           // not a diagonal move or no move
-                !(new_direction.x == 0 && direction.x == 0) &&                          // not a 180
-                !(new_direction.y == 0 && direction.y == 0) ) {
-                direction = new_direction;
+        if (cheatEnabled) {
+            // validate the cheat method
+            if (Cheat && typeof(Cheat.cheat) == "function") {
+                var start = new Date().getTime();
+                var new_direction = Cheat.cheat();
+                var end = new Date().getTime();
+                if (end - start > 3) console.log(end - start);
+
+                // validate returned direction
+                if (new_direction &&                                                                            // direction exists
+                    typeof(new_direction.x) == "number" && new_direction.x >= -1 && new_direction.x <= 1 &&     // x is a number between -1 and 1
+                    typeof(new_direction.y) == "number" && new_direction.y >= -1 && new_direction.y <= 1 &&     // y is a number between -1 and 1
+                    (Math.abs(new_direction.x) + Math.abs(new_direction.y) == 1) &&                             // not a diagonal move or no move
+                    !(new_direction.x == 0 && direction.x == 0) &&                                              // not a 180
+                    !(new_direction.y == 0 && direction.y == 0) ) {
+                    direction = new_direction;
+                }
+            }
+            else {
+                // disable cheat
+                cheatEnabled = false;
+                $("#board").removeClass("red-border");
+                $(".button").removeClass("red-border");
             }
         }
 
@@ -176,7 +194,7 @@ var Cheat;
     }
 
     function enableCheat() {
-        if (cheatPlugin) {
+        if (Cheat) {
             if (cheatEnabled) {
                 // disable cheat
                 cheatEnabled = false;
@@ -297,7 +315,7 @@ var Cheat;
 
         positions = null;       // 2D array to keep track of positions
 
-        loop = null;            // interval loop
+        loop = null;            // interval loop object
 
         direction = {           // direction to update in
             x: 1,
@@ -341,9 +359,6 @@ var Cheat;
     }
 
     $(document).ready(function() {
-        // create cheat object
-        if (Cheat) cheatPlugin = new Cheat();
-
         setup();
 
         // initiate keyboard listener
@@ -365,43 +380,44 @@ var Cheat;
     });
 
     // public API definition
-    Snake = function() {
+    var Snake = {}
 
-        // return height of board in blocks
-        this.getHeight = function() {
-            return height;
-        }
-
-        // return width of board in blocks
-        this.getWidth = function() {
-            return width;
-        }
-
-        // return 2D array of positions
-        this.getPositions = function() {
-            return positions.clone();
-        }
-
-        // check position
-        this.checkPosition = function(x, y) {
-            return checkPosition(x, y);
-        }
-
-        // return head position
-        this.getPosition = function() {
-            return {x: head.x, y: head.y};
-        }
-
-        // return tail position
-        this.getTailPosition = function() {
-            return {x: tail.x, y: tail.y};
-        }
-
-        // return food position
-        this.getFoodPosition = function() {
-            var food = document.getElementById("food");
-            return {x: food.x, y: food.y};
-        }
-
+    // return height of board in blocks
+    Snake.getHeight = function() {
+        return height;
     }
+
+    // return width of board in blocks
+    Snake.getWidth = function() {
+        return width;
+    }
+
+    // return 2D array of positions
+    Snake.getPositions = function() {
+        return positions.clone();
+    }
+
+    // check position returns 0 if empty, 1 if full, 2 if food
+    Snake.checkPosition = function(x, y) {
+        return checkPosition(x, y);
+    }
+
+    // return head position
+    Snake.getPosition = function() {
+        return {x: head.x, y: head.y};
+    }
+
+    // return tail position
+    Snake.getTailPosition = function() {
+        return {x: tail.x, y: tail.y};
+    }
+
+    // return food position
+    Snake.getFoodPosition = function() {
+        var food = document.getElementById("food");
+        return {x: food.x, y: food.y};
+    }
+
+    return Snake;
+
 })();
