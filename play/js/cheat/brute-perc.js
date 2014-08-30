@@ -1,16 +1,6 @@
-// public API
-var snake = new Snake();
+Cheat = (function () {
 
-(function () {
-
-    Cheat = function() {
-        this.cheat = function() {
-            sort_moves();
-            return choose_move();
-        }
-    }
-
-    // CHEAT FUNCTIONALITY
+    // CHEAT BRUTE PERCOLATION
 
     /**
       * This cheat function works by evaluating all of the possible four moves
@@ -84,17 +74,17 @@ var snake = new Snake();
 
     // does the move kill you
     function kills_you(move) {
-        var pos = snake.getPosition();
-        var check = snake.checkPosition(pos.x + move.x, pos.y + move.y);
+        var pos = Snake.getPosition();
+        var check = Snake.checkPosition(pos.x + move.x, pos.y + move.y);
         if (check == 1) return true;
         else return false;
     }
 
     // does the move get closer to the food
     function closer_to_food(move) {
-        var pos = snake.getPosition();
+        var pos = Snake.getPosition();
         var new_pos = {x: pos.x + move.x, y: pos.y + move.y};
-        var food_pos = snake.getFoodPosition();
+        var food_pos = Snake.getFoodPosition();
 
         if ((Math.abs(new_pos.x - food_pos.x) < Math.abs(pos.x - food_pos.x)) || 
             (Math.abs(new_pos.y - food_pos.y) < Math.abs(pos.y - food_pos.y)) ) {
@@ -105,13 +95,13 @@ var snake = new Snake();
 
     // does the board percolate
     function percolates(move) {
-        var positions = snake.getPositions();
-        var height = snake.getHeight();
-        var width = snake.getWidth();
+        var positions = Snake.getPositions();
+        var height = Snake.getHeight();
+        var width = Snake.getWidth();
 
         // move tail to where we're going
-        var head = snake.getPosition();
-        var tail = snake.getTailPosition();
+        var head = Snake.getPosition();
+        var tail = Snake.getTailPosition();
         positions[tail.x][tail.y] = 0;
         positions[head.x + move.x][head.y + move.y] = 1;
 
@@ -145,4 +135,14 @@ var snake = new Snake();
         // all filled in
         return true;
     }
+
+    // Outward facing API
+    BrutePerc = {};
+
+    BrutePerc.cheat = function() {
+        sort_moves();
+        return choose_move();
+    }
+
+    return BrutePerc;
 })();
