@@ -109,6 +109,10 @@ body {
     background: red;
 }
 
+.description {
+    line-height: 25px;
+}
+
 .load-btn {
     position: relative;
     width: 50%;
