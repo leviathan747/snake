@@ -1,3 +1,26 @@
+body {
+    font-family: Arial;
+    font-size: 15px;
+    color: white;
+}
+
+.board {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    box-sizing: border-box;
+    border: 1px solid white;
+}
+
+.pane {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 70%;
+    width: 100%;
+    background: black;
+}
+
 .block {
     position: absolute;
     background-color: white;
@@ -18,10 +41,8 @@
     top: 50%;
     left: 50%;
     line-height: 400px;
-    font-family: Arial;
     font-size: 200px;
     text-align: center;
-    color: white;
     text-shadow: -3px 0 black, 0 3px black, 3px 0 black, 0 -3px black;
 }
 
@@ -45,24 +66,40 @@
 
 .cheat-box {
     position: absolute;
-    top: 10%;
-    left: 10%;
-    height: 80%;
-    width: 80%;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
     background: black;
     border: 1px solid white;
     -webkit-user-select: none;
     cursor: default;
 }
 
+.title {
+    position: relative;
+    background: black;
+    padding: 0 20px;
+    color: red;
+    border: 1px solid white;
+}
+
+.control-btn {
+    position: relative;
+    width: 50px;
+    background: black;
+    border: 1px solid white;
+    text-align: center;
+    padding: 0 10px;
+}
+.control-btn:hover,active {
+    color: red;
+}
+
 .cheat-row {
-    height: 40px;
-    color: white;
-    font-family: Arial;
-    font-size: 20px;
     line-height: 40px;
     border: 1px solid white;
-    padding: 0 10px;
+    padding: 0 20px;
     background: black;
 }
 .cheat-row:hover,active {
@@ -72,18 +109,24 @@
     background: red;
 }
 
+.description {
+    line-height: 25px;
+}
+
 .load-btn {
     position: relative;
     width: 50%;
-    font-family: Arial;
-    font-size: 20px;
     background: black;
     border: 1px solid white;
-    color: white;
     text-align: center;
 }
 .load-btn:hover,active {
     color: red;
+}
+
+.upload-btn {
+    display: none;
+    visibility: hidden;
 }
 
 .uploader {
@@ -166,6 +209,29 @@
 
 /* Desktop Styles */
 @media (min-device-width: 992px) {
+    body {
+        font-size: 20px;
+    }
+    .cheat-box {
+        top: 10%;
+        left: 10%;
+        height: 80%;
+        width: 80%;
+    }
+    .title {
+        font-size: 25px;
+    }
+    .control-btn {
+        width: 100px;
+    }
+    .upload-btn {
+        display: table-cell;
+        visibility: visible;
+    }
+    .description {
+        font-size: 15px;
+        line-height: 25px;
+    }
     .pane {
         left: 0;
         height: 100%;
