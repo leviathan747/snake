@@ -13,6 +13,10 @@
         <!-- favicon -->
         <link rel="shortcut icon" href="img/favicon.ico?v=1">
 
+        <!-- libraries -->
+        <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
         <!-- styling -->
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
@@ -24,7 +28,7 @@
                 <div class="col-xs-12 col-md-8 col-md-offset-2" style="-webkit-user-select:none">
                         <img class="img-responsive pull-left" alt="banner.png" src="img/banner.png" style="max-width:30%">
                         <img class="img-responsive pull-right" alt="title.png" src="img/title.png" style="max-width:60%">
-                </div>
+                </div>                
             </div>
             <br>
             <div class="row">
@@ -58,9 +62,10 @@
                             </table>
                             Tap the center of the screen to pause/play<br>
                         </div>
-                        Collect food to grow long and avoid walls and your own tail!<a href="play" style="padding-left:10px">Play snake</a>
+                        Collect food to grow long and avoid walls and your own tail!
+                        <h3><em><a href="play">Play snake</a></em></h3>
                     </p>
-                    <br>
+                    <br><br>
 
                     <h1>Contributing</h1>
                     <p>
@@ -69,12 +74,103 @@
                         by submitting issues and pull requests. Submit cheat algorithms into the <span style="color:red">/play/js/cheat</span>
                         directory.
                     </p>
-                    <br>
+                    <br><br>
 
                     <h1>Cheat</h1>
                     <p>
-                        This is how you write a cheat plugin
+                        This implementation of Snake! was specifically built to explore the interesting strategy of the game. It is designed to be
+                        easily pluggable with configurable behavior. Cheat plugins can be added and interchanged dynamically at runtime using the
+                        sideloader module. The game provides an API available to the developers to access important information about the game
+                        such as the position of the food or the direction the snake is travelling. What are you waiting for? <span style="color:red">
+                        Go write a snake bot!</span>
                     </p>
+                    <p>
+                        <h3><em>Writing a cheat</em></h3>
+                        Custom cheats are written by overriding the <code>Cheat</code> object in JavaScript. See more on the API <a href="">here</a>.
+
+                        <h3><em>Loading a cheat</em></h3>
+                        Cheats can be loaded using the sideloader module. The sideloader module allows users to upload their own JavaScript files or
+                        load cheat files that already exist in the repository. To open the sideloader, press: <span style="color:red">down, up, down, 
+                        left, right, down, down</span>.
+                        <div class="panel naked-panel">
+                            <div class="panel-heading" style="padding-left:0">
+                                <a data-toggle="collapse" href="#sideloader-panel">help</a>
+                            </div>
+                            <div id="sideloader-panel" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <table class="hidden-mobile" style="margin: 10px 0">
+                                        <tr>
+                                            <td></td>
+                                            <td id="sideloader-up" class="arrow-wrapper"><span class="glyphicon glyphicon-arrow-up"></span></td>
+                                            <td></td>
+                                        </tr>
+                                            <td id="sideloader-left" class="arrow-wrapper"><span class="glyphicon glyphicon-arrow-left"></span></td>
+                                            <td id="sideloader-down" class="arrow-wrapper"><span class="glyphicon glyphicon-arrow-down"></span></td>
+                                            <td id="sideloader-right" class="arrow-wrapper"><span class="glyphicon glyphicon-arrow-right"></span></td>
+                                        <tr>
+                                        </tr>
+                                    </table>
+                                    <script>
+                                        (function() {
+                                            var sideloader = ["down","up","down","left","right","down","down","blank","blank"];
+                                            var i = 0;
+                                            setInterval(function() {
+                                                $("#sideloader-" + sideloader[i%sideloader.length]).css("background","red");
+                                                setTimeout(function(elem) {
+                                                    elem.css("background","black");
+                                                }, 300, $("#sideloader-" + sideloader[i%sideloader.length]));
+                                                i++;
+                                            }, 500);
+                                        })();
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3><em>Enabling a cheat</em></h3>
+                        Once loaded, a cheat can be enabled/disabled by pressing: <span style="color:red">up, left, down, left, right, right, right</span>.
+                        <div class="panel naked-panel">
+                            <div class="panel-heading" style="padding-left:0">
+                                <a data-toggle="collapse" href="#enable-panel">help</a>
+                            </div>
+                            <div id="enable-panel" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <table class="hidden-mobile" style="margin: 10px 0">
+                                        <tr>
+                                            <td></td>
+                                            <td id="enable-up" class="arrow-wrapper"><span class="glyphicon glyphicon-arrow-up"></span></td>
+                                            <td></td>
+                                        </tr>
+                                            <td id="enable-left" class="arrow-wrapper"><span class="glyphicon glyphicon-arrow-left"></span></td>
+                                            <td id="enable-down" class="arrow-wrapper"><span class="glyphicon glyphicon-arrow-down"></span></td>
+                                            <td id="enable-right" class="arrow-wrapper"><span class="glyphicon glyphicon-arrow-right"></span></td>
+                                        <tr>
+                                        </tr>
+                                    </table>
+                                    <script>
+                                        (function() {
+                                            var enable = ["up","left","down","left","right","right","right","blank","blank"];
+                                            var i = 0;
+                                            setInterval(function() {
+                                                $("#enable-" + enable[i%enable.length]).css("background","red");
+                                                setTimeout(function(elem) {
+                                                    elem.css("background","black");
+                                                }, 300, $("#enable-" + enable[i%enable.length]));
+                                                i++;
+                                            }, 500);
+                                        })();
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </p>
+                    <br><br>
+
+                    <h1>API</h1>
+                    <p>
+                        Documentation of the Snake API
+                    </p>
+                    <br><br><br><br><br><br>
                 </div>
             </div>
         </div>

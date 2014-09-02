@@ -7,6 +7,8 @@ body {
 a {color:red}
 a:hover,visited,active {color:red}
 
+code {color:red;background:#505050}
+
 .hidden-mobile {
     display: none;
     visibility: hidden;
@@ -44,11 +46,18 @@ a:hover,visited,active {color:red}
         text-align: center;
         font-size: 30px;
         border: 1px solid white;
+        background: black;
     }
 
     .key-label {
         padding-left: 10px;
         padding-right: 30px;
+    }
+
+    .naked-panel {
+        background: black;
+        color: white;
+        border: none;
     }
 }
 
