@@ -329,9 +329,6 @@ const Snake = (function() {
         set = false;            // if a game is ready
         turned = false;         // to keep from turning more than once per update
 
-        cheatEnabled = false;
-        $("#board").removeClass("red-border");
-        $(".button").removeClass("red-border");
         history = new History(7);
 
         score = 0;

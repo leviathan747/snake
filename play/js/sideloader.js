@@ -33,8 +33,8 @@ const Sideloader = (function() {
         else {
             // deselect old row
             if (selected) {
-                selected.removeClass("cheat-row-selected");
-                selected.children().eq(1).addClass("hidden");
+                selected.parent().removeClass("cheat-row-selected");
+                selected.parent().children().eq(1).addClass("hidden");
             }
 
             // select
