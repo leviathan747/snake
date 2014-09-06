@@ -446,6 +446,11 @@ const Snake = (function() {
         return {x: food.x, y: food.y};
     }
 
+    // return length of the snake
+    Snake.getLength = function() {
+        return score + 5;
+    }
+
     return Snake;
 
 })();
