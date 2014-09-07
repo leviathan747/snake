@@ -7,7 +7,7 @@ body {
 a {color:red}
 a:hover,visited,active {color:red}
 
-code {color:red;background:#505050}
+code {color:red;background:#404040}
 
 .hidden-mobile {
     display: none;

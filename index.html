@@ -168,8 +168,208 @@
 
                     <h1>API</h1>
                     <p>
-                        Documentation of the Snake API
+                        This API outlines the documentation of the <em>Cheat</em> and <em>Snake</em> classes
+                        as well as the <em>Position</em> and <em>Direction</em> types. Questions or suggestions
+                        can be posted on the Github repository.
                     </p>
+
+                    <h3><code style="color:white">Snake</code></h3>
+                    <div style="margin-left:40px">
+                        <p>
+                            <em>Snake</em> is a singleton class used to expose all interesting
+                            information about the game. Snake is the outward facing interface
+                            that should be used to design cheat behaviors. If there is a piece of
+                            information that your cheat needs that you'd like to be added to the API,
+                            submit an issue or pull request on the Github repository.
+                        </p>
+                        <br>
+
+                        <h4 style="color:red">Field Summary</h4>
+                        <p>
+                            <em>No public fields</em>
+                        </p>
+                        <br>
+
+                        <h4 style="color:red">Method Summary</h4>
+
+                        <h4><code><em style="color:white">int</em> Snake.getHeight()</code></h4>
+                        <p style="margin-left:40px">
+                            getHeight() returns the height of the game board in tiles. When the game is loaded, the
+                            board is resized dynamically to fit the screen.<br>
+                            <span style="color:red">params</span> - <em>none</em><br>
+                            <span style="color:red">return</span> - <em>integer height of board</em><br>
+                        </p>
+                        <br>
+
+                        <h4><code><em style="color:white">int</em> Snake.getWidth()</code></h4>
+                        <p style="margin-left:40px">
+                            getWidth() returns the width of the game board in tiles. When the game is loaded, the
+                            board is resized dynamically to fit the screen.<br>
+                            <span style="color:red">params</span> - <em>none</em><br>
+                            <span style="color:red">return</span> - <em>integer width of board</em><br>
+                        </p>
+                        <br>
+
+                        <h4><code><em style="color:white">int[][]</em> Snake.getPositions()</code></h4>
+                        <p style="margin-left:40px">
+                            getPositions() returns a copy of the two dimensional array of size
+                            Snake.getWidth() x Snake.getHeight() that represents all the positions on the board.
+                            Each entry is either a 0, 1, or 2. 0 represents an empty space, 1 represents a space
+                            filled by the snake, and 2 represents a space filled by the food.<br>
+                            <span style="color:red">params</span> - <em>none</em><br>
+                            <span style="color:red">return</span> - <em>copy of the 2D positions array</em><br>
+                        </p>
+                        <br>
+
+                        <h4><code><em style="color:white">int</em> Snake.checkPosition(<em style="color:white">int</em> x, <em style="color:white">int</em> y)</code></h4>
+                        <p style="margin-left:40px">
+                            checkPosition() returns 0, 1, or 2 based on the x and y coordinates passed in. If the position is filled
+                            by the snake or represents a position outside the game board (i.e. a wall), it returns 1. If the position
+                            is filled by the food, it returns 2. Otherwise it returns 0.<br>
+                            <span style="color:red">params</span> - <em>int</em> <span style="color:red">x</span>: horizontal position, <em>int</em> <span style="color:red">y</span>: vertical position<br>
+                            <span style="color:red">return</span> - <em>integer state of the position</em><br>
+                        </p>
+                        <br>
+
+                        <h4><code><em style="color:white">Position</em> Snake.getPosition()</code></h4>
+                        <p style="margin-left:40px">
+                            getPosition() returns a copy of the Position that represents the the head of the snake.<br>
+                            <span style="color:red">params</span> - <em>none</em><br>
+                            <span style="color:red">return</span> - <em>Position of the head</em><br>
+                        </p>
+                        <br>
+
+                        <h4><code><em style="color:white">Position</em> Snake.getTailPosition()</code></h4>
+                        <p style="margin-left:40px">
+                            getTailPosition() returns a copy of the Position that represents the the tail of the snake.<br>
+                            <span style="color:red">params</span> - <em>none</em><br>
+                            <span style="color:red">return</span> - <em>Position of the tail</em><br>
+                        </p>
+                        <br>
+
+                        <h4><code><em style="color:white">Position</em> Snake.getFoodPosition()</code></h4>
+                        <p style="margin-left:40px">
+                            getFoodPosition() returns a copy of the Position that represents the the food.<br>
+                            <span style="color:red">params</span> - <em>none</em><br>
+                            <span style="color:red">return</span> - <em>Position of the food</em><br>
+                        </p>
+                        <br>
+
+                        <h4><code><em style="color:white">int</em> Snake.getLength()</code></h4>
+                        <p style="margin-left:40px">
+                            getLength() returns the length of the snake. Score can be derived from this because
+                            the length of the snake at the start of the game is 5.<br>
+                            <span style="color:red">params</span> - <em>none</em><br>
+                            <span style="color:red">return</span> - <em>Integer length of the snake</em><br>
+                        </p>
+                        <br>
+
+                        <h4><code><em style="color:white">Direction</em> Snake.getDirection()</code></h4>
+                        <p style="margin-left:40px">
+                            getDirection() returns the current Direction in which the snake is heading.<br>
+                            <span style="color:red">params</span> - <em>none</em><br>
+                            <span style="color:red">return</span> - <em>current Direction of the snake</em><br>
+                        </p>
+                        <br>
+
+                    </div>
+                    <br>
+
+                    <h3><code style="color:white">Cheat</code></h3>
+                    <div style="margin-left:40px">
+                        <p>
+                            <em>Cheat</em> is a singleton class used to define the cheat behavior the
+                            game implements. At the start of the game it is <em>undefined</em>, and the
+                            Sideloader module loads custom JavaScript to override it. The game expects the
+                            Cheat object to have a method Cheat.cheat() that returns a Direction. Every update,
+                            Cheat.cheat() is called before the snake is moved. If Cheat.cheat() returns
+                            <em>null</em>, then the snake continues in the same direction. When writing custom
+                            behavior, the Cheat.cheat() method is the access point for your behavior.
+                        </p>
+                        <br>
+
+                        <h4 style="color:red">Field Summary</h4>
+                        <p>
+                            <em>No public fields</em>
+                        </p>
+                        <br>
+
+                        <h4 style="color:red">Method Summary</h4>
+
+                        <h4><code><em style="color:white">Direction</em> Cheat.cheat()</code></h4>
+                        <p style="margin-left:40px">
+                            cheat() returns a Direction to turn the snake.<br>
+                            <span style="color:red">params</span> - <em>none</em><br>
+                            <span style="color:red">return</span> - <em>Direction to turn the snake</em><br>
+                        </p>
+                        <br>
+
+                    </div>
+                    <br>
+
+                    <h3><code style="color:white">Position</code></h3>
+                    <div style="margin-left:40px">
+                        <p>
+                            The <em>Position</em> class is used to define a unique poisition in the 2D array
+                            that defines the game board
+                        </p>
+                        <br>
+
+                        <h4 style="color:red">Field Summary</h4>
+
+                        <h4><code><em style="color:white">int</em> x</code></h4>
+                        <p style="margin-left:40px">
+                            the x position in the 2D array game board.<br>
+                        </p>
+                        <br>
+
+                        <h4><code><em style="color:white">int</em> y</code></h4>
+                        <p style="margin-left:40px">
+                            the y position in the 2D array game board.<br>
+                        </p>
+                        <br>
+
+                        <h4 style="color:red">Method Summary</h4>
+                        <p>
+                            <em>No public methods</em>
+                        </p>
+                        <br>
+
+                    </div>
+                    <br>
+
+                    <h3><code style="color:white">Direction</code></h3>
+                    <div style="margin-left:40px">
+                        <p>
+                            The <em>Direction</em> class is used to define the four possible
+                            directions the snake can be travelling: left, up, right, and down.
+                            Note that if |x| > 0, then y must be 0, and likewise if |y| > 0, then
+                            x must be 0. Diagonal directions are illegal values for <em>Direction</em>.
+                        </p>
+                        <br>
+
+                        <h4 style="color:red">Field Summary</h4>
+
+                        <h4><code><em style="color:white">int</em> x</code></h4>
+                        <p style="margin-left:40px">
+                            the x direction, -1, 0, or 1.<br>
+                        </p>
+                        <br>
+
+                        <h4><code><em style="color:white">int</em> y</code></h4>
+                        <p style="margin-left:40px">
+                            the y direction, -1, 0, or 1.<br>
+                        </p>
+                        <br>
+
+                        <h4 style="color:red">Method Summary</h4>
+                        <p>
+                            <em>No public methods</em>
+                        </p>
+                        <br>
+
+                    </div>
+
                     <br><br><br><br><br><br>
                 </div>
             </div>
