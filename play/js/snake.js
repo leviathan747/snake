@@ -451,6 +451,11 @@ const Snake = (function() {
         return score + 5;
     }
 
+    // return direction of the snake
+    Snake.getDirection = function() {
+        return direction;
+    }
+
     return Snake;
 
 })();
