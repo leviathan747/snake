@@ -32,8 +32,60 @@
             </div>
             <br>
             <div class="row">
+                <div class="col-md-2 hidden-mobile hidden-desktop" style="overflow:hidden">
+                    <ul class="nav">
+                        <li><a href="#How-to-Play" style="color:white;text-decoration:none">How to Play</a>
+                            <ul class="nav">
+                                <li><a href="play" style="color:white;text-decoration:none">Play Snake</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#Contributing" style="color:white;text-decoration:none">Contributing</a></li>
+                        <li><a href="#Cheat" style="color:white;text-decoration:none">Cheat</a>
+                            <ul class="nav">
+                                <li><a href="#Writing" style="color:white;text-decoration:none">Writing a cheat</a></li>
+                                <li><a href="#Loading" style="color:white;text-decoration:none">Loading a cheat</a></li>
+                                <li><a href="#Enabling" style="color:white;text-decoration:none">Enabling a cheat</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#API" style="color:white;text-decoration:none">API</a>
+                            <ul class="nav">
+                                <li><a href="#Snake" style="color:white;text-decoration:none">Snake</a>
+                                    <ul class="nav">
+                                        <li><a href="#snake-getHeight" style="color:white;text-decoration:none">Snake.getHeight()</a></li>
+                                        <li><a href="#snake-getWidth" style="color:white;text-decoration:none">Snake.getWidth()</a></li>
+                                        <li><a href="#snake-getPositions" style="color:white;text-decoration:none">Snake.getPositions()</a></li>
+                                        <li><a href="#snake-checkPosition" style="color:white;text-decoration:none">Snake.checkPosition()</a></li>
+                                        <li><a href="#snake-getPosition" style="color:white;text-decoration:none">Snake.getPosition()</a></li>
+                                        <li><a href="#snake-getTailPosition" style="color:white;text-decoration:none">Snake.getTailPosition()</a></li>
+                                        <li><a href="#snake-getFoodPosition" style="color:white;text-decoration:none">Snake.getFoodPosition()</a></li>
+                                        <li><a href="#snake-getLength" style="color:white;text-decoration:none">Snake.getLength()</a></li>
+                                        <li><a href="#snake-getDirection" style="color:white;text-decoration:none">Snake.getDirection()</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#Cheat" style="color:white;text-decoration:none">Cheat</a>
+                                    <ul class="nav">
+                                        <li><a href="#cheat-cheat" style="color:white;text-decoration:none">Cheat.cheat()</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#Position" style="color:white;text-decoration:none">Position</a>
+                                    <ul class="nav">
+                                        <li><a href="#position-x" style="color:white;text-decoration:none">Position.x</a></li>
+                                        <li><a href="#position-y" style="color:white;text-decoration:none">Position.y</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="#Direction" style="color:white;text-decoration:none">Direction</a>
+                                    <ul class="nav">
+                                        <li><a href="#direction-x" style="color:white;text-decoration:none">Direction.x</a></li>
+                                        <li><a href="#direction-y" style="color:white;text-decoration:none">Direction.y</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="#top" style="color:white;text-decoration:none">Back to top</a></li>
+                    </ul>
+                </div>
                 <div class="col-xs-12 col-md-8 col-md-offset-2">
-                    <h1>How to play</h1>
+                    <h1 id="How-to-Play">How to play</h1>
                     <p>
                         <div class="hidden-mobile">
                             <table style="margin: 10px 0"><tr>
@@ -67,7 +119,7 @@
                     </p>
                     <br><br>
 
-                    <h1>Contributing</h1>
+                    <h1 id="Contributing">Contributing</h1>
                     <p>
                         Snake is an open source project. Contribute to the 
                         <a href="http://github.com/leviathan747/snake">github repository</a> 
@@ -76,7 +128,7 @@
                     </p>
                     <br><br>
 
-                    <h1>Cheat</h1>
+                    <h1 id="Cheat">Cheat</h1>
                     <p>
                         This implementation of Snake! was specifically built to explore the interesting strategy of the game. It is designed to be
                         easily pluggable with configurable behavior. Cheat plugins can be added and interchanged dynamically at runtime using the
@@ -85,10 +137,10 @@
                         Go write a snake bot!</span>
                     </p>
                     <p>
-                        <h3><em>Writing a cheat</em></h3>
-                        Custom cheats are written by overriding the <code>Cheat</code> object in JavaScript. See more on the API <a href="">here</a>.
+                        <h3 id="Writing"><em>Writing a cheat</em></h3>
+                        Custom cheats are written by overriding the <code>Cheat</code> object in JavaScript. See more on the API <a href="#API">here</a>.
 
-                        <h3><em>Loading a cheat</em></h3>
+                        <h3 id="Loading"><em>Loading a cheat</em></h3>
                         Cheats can be loaded using the sideloader module. The sideloader module allows users to upload their own JavaScript files or
                         load cheat files that already exist in the repository. To open the sideloader, press: <span style="color:red">down, up, down, 
                         left, right, down, down</span>.
@@ -127,7 +179,7 @@
                             </div>
                         </div>
 
-                        <h3><em>Enabling a cheat</em></h3>
+                        <h3 id="Enabling"><em>Enabling a cheat</em></h3>
                         Once loaded, a cheat can be enabled/disabled by pressing: <span style="color:red">up, left, down, left, right, right, right</span>.
                         <div class="panel naked-panel">
                             <div class="panel-heading" style="padding-left:0">
@@ -166,18 +218,19 @@
                     </p>
                     <br><br>
 
-                    <h1>API</h1>
+                    <h1 id="API">API</h1>
                     <p>
-                        This API outlines the documentation of the <em>Cheat</em> and <em>Snake</em> classes
-                        as well as the <em>Position</em> and <em>Direction</em> types. Questions or suggestions
-                        can be posted on the Github repository.
+                        This API outlines the documentation of the <a href="#Snake"><em>Snake</em></a> and
+                        <a href="#Cheat"><em>Cheat</em></a> classes as well as the <a href="#Position"><em>Position</em></a>
+                        and <a href="#Direction"><em>Direction</em></a> types. Questions or suggestions can be posted on
+                        the Github repository.
                     </p>
 
-                    <h3><code style="color:white">Snake</code></h3>
+                    <h3 id="Snake"><code style="color:white">Snake</code></h3>
                     <div style="margin-left:40px">
                         <p>
                             <em>Snake</em> is a singleton class used to expose all interesting
-                            information about the game. Snake is the outward facing interface
+                            information about the game. <em>Snake</em> is the outward facing interface
                             that should be used to design cheat behaviors. If there is a piece of
                             information that your cheat needs that you'd like to be added to the API,
                             submit an issue or pull request on the Github repository.
@@ -192,7 +245,7 @@
 
                         <h4 style="color:red">Method Summary</h4>
 
-                        <h4><code><em style="color:white">int</em> Snake.getHeight()</code></h4>
+                        <h4 id="snake-getHeight"><code><em style="color:white">int</em> Snake.getHeight()</code></h4>
                         <p style="margin-left:40px">
                             getHeight() returns the height of the game board in tiles. When the game is loaded, the
                             board is resized dynamically to fit the screen.<br>
@@ -201,7 +254,7 @@
                         </p>
                         <br>
 
-                        <h4><code><em style="color:white">int</em> Snake.getWidth()</code></h4>
+                        <h4 id="snake-getWidth"><code><em style="color:white">int</em> Snake.getWidth()</code></h4>
                         <p style="margin-left:40px">
                             getWidth() returns the width of the game board in tiles. When the game is loaded, the
                             board is resized dynamically to fit the screen.<br>
@@ -210,7 +263,7 @@
                         </p>
                         <br>
 
-                        <h4><code><em style="color:white">int[][]</em> Snake.getPositions()</code></h4>
+                        <h4 id="snake-getPositions"><code><em style="color:white">int[][]</em> Snake.getPositions()</code></h4>
                         <p style="margin-left:40px">
                             getPositions() returns a copy of the two dimensional array of size
                             Snake.getWidth() x Snake.getHeight() that represents all the positions on the board.
@@ -221,7 +274,7 @@
                         </p>
                         <br>
 
-                        <h4><code><em style="color:white">int</em> Snake.checkPosition(<em style="color:white">int</em> x, <em style="color:white">int</em> y)</code></h4>
+                        <h4 id="snake-checkPosition"><code><em style="color:white">int</em> Snake.checkPosition(<em style="color:white">int</em> x, <em style="color:white">int</em> y)</code></h4>
                         <p style="margin-left:40px">
                             checkPosition() returns 0, 1, or 2 based on the x and y coordinates passed in. If the position is filled
                             by the snake or represents a position outside the game board (i.e. a wall), it returns 1. If the position
@@ -231,7 +284,7 @@
                         </p>
                         <br>
 
-                        <h4><code><em style="color:white">Position</em> Snake.getPosition()</code></h4>
+                        <h4 id="snake-getPosition"><code><em style="color:white">Position</em> Snake.getPosition()</code></h4>
                         <p style="margin-left:40px">
                             getPosition() returns a copy of the Position that represents the the head of the snake.<br>
                             <span style="color:red">params</span> - <em>none</em><br>
@@ -239,7 +292,7 @@
                         </p>
                         <br>
 
-                        <h4><code><em style="color:white">Position</em> Snake.getTailPosition()</code></h4>
+                        <h4 id="snake-getTailPosition"><code><em style="color:white">Position</em> Snake.getTailPosition()</code></h4>
                         <p style="margin-left:40px">
                             getTailPosition() returns a copy of the Position that represents the the tail of the snake.<br>
                             <span style="color:red">params</span> - <em>none</em><br>
@@ -247,7 +300,7 @@
                         </p>
                         <br>
 
-                        <h4><code><em style="color:white">Position</em> Snake.getFoodPosition()</code></h4>
+                        <h4 id="snake-getFoodPosition"><code><em style="color:white">Position</em> Snake.getFoodPosition()</code></h4>
                         <p style="margin-left:40px">
                             getFoodPosition() returns a copy of the Position that represents the the food.<br>
                             <span style="color:red">params</span> - <em>none</em><br>
@@ -255,7 +308,7 @@
                         </p>
                         <br>
 
-                        <h4><code><em style="color:white">int</em> Snake.getLength()</code></h4>
+                        <h4 id="snake-getLength"><code><em style="color:white">int</em> Snake.getLength()</code></h4>
                         <p style="margin-left:40px">
                             getLength() returns the length of the snake. Score can be derived from this because
                             the length of the snake at the start of the game is 5.<br>
@@ -264,7 +317,7 @@
                         </p>
                         <br>
 
-                        <h4><code><em style="color:white">Direction</em> Snake.getDirection()</code></h4>
+                        <h4 id="snake-getDirection"><code><em style="color:white">Direction</em> Snake.getDirection()</code></h4>
                         <p style="margin-left:40px">
                             getDirection() returns the current Direction in which the snake is heading.<br>
                             <span style="color:red">params</span> - <em>none</em><br>
@@ -275,7 +328,7 @@
                     </div>
                     <br>
 
-                    <h3><code style="color:white">Cheat</code></h3>
+                    <h3 id="Cheat"><code style="color:white">Cheat</code></h3>
                     <div style="margin-left:40px">
                         <p>
                             <em>Cheat</em> is a singleton class used to define the cheat behavior the
@@ -296,7 +349,7 @@
 
                         <h4 style="color:red">Method Summary</h4>
 
-                        <h4><code><em style="color:white">Direction</em> Cheat.cheat()</code></h4>
+                        <h4 id="cheat-cheat"><code><em style="color:white">Direction</em> Cheat.cheat()</code></h4>
                         <p style="margin-left:40px">
                             cheat() returns a Direction to turn the snake.<br>
                             <span style="color:red">params</span> - <em>none</em><br>
@@ -307,7 +360,7 @@
                     </div>
                     <br>
 
-                    <h3><code style="color:white">Position</code></h3>
+                    <h3 id="Position"><code style="color:white">Position</code></h3>
                     <div style="margin-left:40px">
                         <p>
                             The <em>Position</em> class is used to define a unique poisition in the 2D array
@@ -317,13 +370,13 @@
 
                         <h4 style="color:red">Field Summary</h4>
 
-                        <h4><code><em style="color:white">int</em> x</code></h4>
+                        <h4 id="position-x"><code><em style="color:white">int</em> x</code></h4>
                         <p style="margin-left:40px">
                             the x position in the 2D array game board.<br>
                         </p>
                         <br>
 
-                        <h4><code><em style="color:white">int</em> y</code></h4>
+                        <h4 id="position-y"><code><em style="color:white">int</em> y</code></h4>
                         <p style="margin-left:40px">
                             the y position in the 2D array game board.<br>
                         </p>
@@ -338,7 +391,7 @@
                     </div>
                     <br>
 
-                    <h3><code style="color:white">Direction</code></h3>
+                    <h3 id="Direction"><code style="color:white">Direction</code></h3>
                     <div style="margin-left:40px">
                         <p>
                             The <em>Direction</em> class is used to define the four possible
@@ -350,13 +403,13 @@
 
                         <h4 style="color:red">Field Summary</h4>
 
-                        <h4><code><em style="color:white">int</em> x</code></h4>
+                        <h4 id="direction-x"><code><em style="color:white">int</em> x</code></h4>
                         <p style="margin-left:40px">
                             the x direction, -1, 0, or 1.<br>
                         </p>
                         <br>
 
-                        <h4><code><em style="color:white">int</em> y</code></h4>
+                        <h4 id="direction-y"><code><em style="color:white">int</em> y</code></h4>
                         <p style="margin-left:40px">
                             the y direction, -1, 0, or 1.<br>
                         </p>
