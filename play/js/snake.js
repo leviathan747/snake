@@ -329,7 +329,7 @@ const Snake = (function() {
         set = false;            // if a game is ready
         turned = false;         // to keep from turning more than once per update
 
-        history = new History(7);
+        history = new FixedQueue(7);
 
         score = 0;
 
