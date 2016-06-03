@@ -6,5 +6,9 @@
     {
         "name": "circular.js",
         "description": "This cheat just turns every 10 blocks in a circular pattern"
+    },
+    {
+	"name": "zigzag.js",
+	"description": "This cheat changes the movement to a zigzag pattern"
     }
 ]
