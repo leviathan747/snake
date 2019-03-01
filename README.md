@@ -1,4 +1,4 @@
 Snake!
 =========
 
-http://levistarrett.com/snake
+https://leviathan747.github.io/snake
